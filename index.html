@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Judô Riacho Grande | Associação Esportiva</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        /* Cores do Judô: Branco, Azul, Vermelho */
+        :root {
+            --judo-blue: #1a3a6b;
+            --judo-red: #c42a2a;
+            --judo-white: #ffffff;
+            --judo-light-blue: #e8f0fe;
+            --judo-gray: #f0f0f0;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* CABEÇALHO */
+        .header {
+            background: linear-gradient(135deg, var(--judo-blue) 0%, #0d2442 100%);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header h1 span {
+            color: var(--judo-red);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .faixa {
+            width: 80px;
+            height: 5px;
+            background: var(--judo-red);
+            margin: 20px auto;
+            border-radius: 10px;
+        }
+
+        /* MENU NAVEGAÇÃO */
+        .nav-menu {
+            background: white;
+            border-radius: 60px;
+            padding: 15px 25px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+
+        .nav-menu a {
+            color: var(--judo-blue);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 20px;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        .nav-menu a:hover {
+            background: var(--judo-blue);
+            color: white;
+        }
+
+        /* SEÇÕES */
+        .section {
+            background: white;
+            border-radius: 30px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            color: var(--judo-blue);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 6px solid var(--judo-red);
+            padding-left: 20px;
+        }
+
+        /* SOBRE / HISTÓRIA */
+        .sobre-content {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .sobre-texto {
+            flex: 2;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .sobre-texto p {
+            margin-bottom: 15px;
+        }
+
+        .sobre-destaque {
+            flex: 1;
+            background: var(--judo-light-blue);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .sobre-destaque .numero {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--judo-red);
+        }
+
+        /* TABELA DE HORÁRIOS */
+        .tabela-horarios {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        th {
+            background: var(--judo-blue);
+            color: white;
+            padding: 15px;
+            font-size: 1rem;
+        }
+
+        td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: var(--judo-light-blue);
+        }
+
+        .faixa-etaria {
+            font-weight: bold;
+            color: var(--judo-blue);
+        }
+
+        /* CALENDÁRIO / EVENTOS */
+        .eventos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card-evento {
+            background: var(--judo-light-blue);
+            border-radius: 20px;
+            padding: 20px;
+            border-left: 5px solid var(--judo-red);
+            transition: transform 0.3s;
+        }
+
+        .card-evento:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-evento .data {
+            color: var(--judo-red);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .card-evento .evento-nome {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .card-evento .local {
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        /* AVISOS */
+        .aviso {
+            background: #fff3cd;
+            border-left: 8px solid #ffc107;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .aviso.urgente {
+            background: #f8d7da;
+            border-left-color: var(--judo-red);
+        }
+
+        .aviso h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .aviso.urgente h3 {
+            color: #721c24;
+        }
+
+        /* GALERIA */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .galeria-item {
+            background: var(--judo-gray);
+            border-radius: 15px;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+
+        .galeria-item:hover {
+            transform: scale(1.02);
+        }
+
+        .galeria-icon {
+            font-size: 4rem;
+        }
+
+        .galeria-item p {
+            margin-top: 10px;
+            font-weight: bold;
+            color: var(--judo-blue);
+        }
+
+        /* CONTATO */
+        .contato-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .contato-card {
+            text-align: center;
+            padding: 25px;
+            background: var(--judo-light-blue);
+            border-radius: 20px;
+        }
+
+        .btn-whatsapp {
+            display: inline-block;
+            background: #25d366;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128C7E;
+        }
+
+        .mapa {
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .mapa iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+
+        /* RODAPÉ */
+        .footer {
+            background: var(--judo-blue);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            border-radius: 30px;
+            margin-top: 20px;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .section {
+                padding: 20px;
+            }
+            .section h2 {
+                font-size: 1.4rem;
+            }
+            .nav-menu {
+                border-radius: 20px;
+                gap: 10px;
+            }
+            .nav-menu a {
+                padding: 5px 12px;
+                font-size: 0.85rem;
+            }
+            th, td {
+                padding: 8px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- CABEÇALHO -->
+        <div class="header">
+            <h1>🥋 <span>Judô Riacho Grande</span> 🥋</h1>
+            <div class="faixa"></div>
+            <p>Disciplina, Respeito e Superação - O Judô que transforma vidas!</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Espaço cedido pela Prefeitura • Taxa simbólica para todos</p>
+        </div>
+
+        <!-- MENU -->
+        <div class="nav-menu">
+            <a href="#home">🏠 Início</a>
+            <a href="#horarios">📅 Horários</a>
+            <a href="#eventos">🎯 Eventos</a>
+            <a href="#avisos">📢 Avisos</a>
+            <a href="#galeria">📸 Galeria</a>
+            <a href="#contato">📞 Contato</a>
+        </div>
+
+        <!-- HOME / SOBRE -->
+        <div class="section" id="home">
+            <h2>🥋 Sobre a Associação</h2>
+            <div class="sobre-content">
+                <div class="sobre-texto">
+                    <p>A <strong>Associação de Judô Riacho Grande</strong> foi fundada em 1997 com o objetivo de levar o esporte e a cidadania para crianças, jovens e adultos da região. Com o apoio da prefeitura, oferecemos um espaço adequado e professores qualificados para a prática do judô.</p>
+                    <p>Nosso método de ensino une a técnica milenar do judô com valores como <strong>disciplina, respeito, autocontrole e superação</strong>. Acreditamos que o esporte é uma ferramenta poderosa de transformação social.</p>
+                    <p>Atualmente, atendemos mais de <strong>50 alunos</strong>, muitos deles bolsistas integrais, graças à parceria com a comunidade e ao trabalho voluntário dos nossos professores. E agora com Jiu-Jitsu para a criançada e adultos aprender a arte suave!!! </p>
+                </div>
+                <div class="sobre-destaque">
+                    <div class="numero">50+</div>
+                    <p>Alunos ativos</p>
+                    <div class="numero" style="margin-top: 15px;">12</div>
+                    <p>Anos de história</p>
+                    <div class="numero" style="margin-top: 15px;">🏆 15</div>
+                    <p>Medalhas em competições</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- HORÁRIOS -->
+        <div class="section" id="horarios">
+            <h2>📅 Horários dos Treinos</h2>
+            <div class="tabela-horarios">
+                <table>
+                    <thead>
+                        <tr><th>Turma</th><th>Faixa Etária</th><th>Dias</th><th>Horário</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="faixa-etaria">🥋 Kids 1</td><td>4 a 6 anos</td><td>Terças e Quintas</td><td>08h00 - 09h00</td></tr>
+                        <tr><td class="faixa-etaria">🥋 Kids 2</td><td>7 a 10 anos</td><td>Segundas e Quartas</td><td>14h00 - 15h30</td></tr>
+                        <tr><td class="faixa-etaria">🥋 Infantojuvenil</td><td>11 a 14 anos</td><td>Terças e Quintas</td><td>15h30 - 17h00</td></tr>
+                        <tr><td class="faixa-etaria">🥋 Juvenil</td><td>15 a 17 anos</td><td>Segundas, Quartas e Sextas</td><td>17h00 - 18h30</td></tr>
+                        <tr><td class="faixa-etaria">🥋 Adulto</td><td>18 a 40 anos</td><td>Segundas e Quartas</td><td>19h00 - 20h30</td></tr>
+                        <tr><td class="faixa-etaria">🥋 Sênior</td><td>Acima de 40 anos</td><td>Terças e Quintas</td><td>19h00 - 20h00</td></tr>
+                        <tr><td class="faixa-etaria">🥋 Treino Livre</td><td>Todas as idades</td><td>Sábados</td><td>09h00 - 11h00</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top: 15px; text-align: center; color: #666;">* Horários sujeitos a alteração. Entre em contato para confirmar disponibilidade de vagas.</p>
+        </div>
+
+        <!-- EVENTOS / CALENDÁRIO -->
+        <div class="section" id="eventos">
+            <h2>🎯 Próximos Eventos</h2>
+            <div class="eventos-grid">
+                <div class="card-evento">
+                    <div class="data">📅 10 de Junho de 2026</div>
+                    <div class="evento-nome">Exame de Faixa - 1º Semestre</div>
+                    <div class="local">📍 Dojô da Associação - Riacho Grande</div>
+                </div>
+                <div class="card-evento">
+                    <div class="data">📅 25 de Junho de 2026</div>
+                    <div class="evento-nome">Campeonato Interno</div>
+                    <div class="local">📍 Ginásio Municipal de Riacho Grande</div>
+                </div>
+                <div class="card-evento">
+                    <div class="data">📅 12 de Julho de 2026</div>
+                    <div class="evento-nome">Festival de Judô - Região Sudeste</div>
+                    <div class="local">📍 São Bernardo do Campo - SP</div>
+                </div>
+                <div class="card-evento">
+                    <div class="data">📅 03 de Agosto de 2026</div>
+                    <div class="evento-nome">Dia do Judô - Aula Aberta</div>
+                    <div class="local">📍 Praça Central de Riacho Grande</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AVISOS -->
+        <div class="section" id="avisos">
+            <h2>📢 Quadro de Avisos</h2>
+            <div class="aviso urgente">
+                <h3>⚠️ ATENÇÃO! ⚠️</h3>
+                <p>No dia 20/05/2026 não haverá treinos devido à manutenção do espaço. As aulas retornam normalmente no dia 21/05.</p>
+            </div>
+            <div class="aviso">
+                <h3>📢 Matrículas Abertas!</h3>
+                <p>Estamos com vagas abertas para todas as turmas. Taxa simbólica de apenas R$ 40,00 mensais. Venha fazer uma aula experimental gratuita!</p>
+            </div>
+            <div class="aviso">
+                <h3>🥋 Doação de Quimonos</h3>
+                <p>Estamos recebendo doações de quimonos usados em bom estado para alunos de baixa renda. Entre em contato para saber como ajudar.</p>
+            </div>
+        </div>
+
+        <!-- GALERIA -->
+        <div class="section" id="galeria">
+            <h2>📸 Momentos da Nossa Academia</h2>
+            <div class="galeria-grid">
+                <div class="galeria-item">
+                    <div class="galeria-icon">🥋</div>
+                    <p>Treino de quedas</p>
+                </div>
+                <div class="galeria-item">
+                    <div class="galeria-icon">🏆</div>
+                    <p>Premiação - Campeonato 2025</p>
+                </div>
+                <div class="galeria-item">
+                    <div class="galeria-icon">🥋</div>
+                    <p>Turma Kids em ação</p>
+                </div>
+                <div class="galeria-item">
+                    <div class="galeria-icon">🎓</div>
+                    <p>Formatura - Novas Faixas</p>
+                </div>
+                <div class="galeria-item">
+                    <div class="galeria-icon">🥋</div>
+                    <p>Treino colaborativo</p>
+                </div>
+                <div class="galeria-item">
+                    <div class="galeria-icon">📸</div>
+                    <p>Confraternização da turma</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 20px; color: #777;">* Clique nas imagens para ampliar (em breve galeria completa)</p>
+        </div>
+
+        <!-- CONTATO -->
+        <div class="section" id="contato">
+            <h2>📞 Entre em Contato</h2>
+            <div class="contato-grid">
+                <div class="contato-card">
+                    <div style="font-size: 3rem;">💬</div>
+                    <h3>WhatsApp</h3>
+                    <p>Matrículas, dúvidas e informações</p>
+                    <a href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20de%20Judô%20na%20Associação%20Riacho%20Grande." class="btn-whatsapp" target="_blank">Enviar mensagem</a>
+                </div>
+                <div class="contato-card">
+                    <div style="font-size: 3rem;">📍</div>
+                    <h3>Localização</h3>
+                    <p>RUA SOFÍA D'ANGELO CAPUTO 275<br> Riacho Grande<br>São Bernardo do Campo - SP</p>
+                </div>
+                <div class="contato-card">
+                    <div style="font-size: 3rem;">⏰</div>
+                    <h3>Horário de Funcionamento</h3>
+                    <p>Segunda a Sexta: 08h às 21h<br>Sábado: 08h às 12h<br>Domingo: Fechado</p>
+                </div>
+            </div>
+            <div class="mapa">
+                <iframe src="https://maps.app.goo.gl/nyCfVDdqxfWWXv519" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+        <!-- RODAPÉ -->
+        <div class="footer">
+            <p>🥋 Associação de Judô Riacho Grande - Disciplina, Respeito e Superação 🥋</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Espaço cedido pela Prefeitura • Taxa simbólica para todos</p>
+        </div>
+    </div>
+</body>
+</html>
